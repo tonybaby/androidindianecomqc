@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "384982433374",
+    "project_id": "indianecomqc",
+    "storage_bucket": "indianecomqc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384982433374:android:8c28de6b6ddb61401dbecf",
+        "android_client_info": {
+          "package_name": "com.indianecomliquidator.indianecomqc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384982433374-kp1v5rqv2n91b16kdn2ql16kbmg65k28.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.indianecomliquidator.indianecomqc",
+            "certificate_hash": "97ea3cee4deab73232ba7251a146aa20a95394ae"
+          }
+        },
+        {
+          "client_id": "384982433374-vfbltm28c575qtd3rrbp6h5qnheb0vkq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCq8KZOt9MaxZGGf4vQpySbH-T7rvnT-BI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384982433374-vfbltm28c575qtd3rrbp6h5qnheb0vkq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
