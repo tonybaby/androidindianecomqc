@@ -3,13 +3,12 @@ package com.indianecomliquidator.indianecomqc;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.multidex.MultiDex;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -19,17 +18,19 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.hootsuite.nachos.NachoTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +40,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -53,6 +55,11 @@ public class HomeActivity extends AppCompatActivity {
 
     String productSubCategoryId, productSubCategoryName;
     LinearLayout linearLayoutNoResult;
+    Dialog dialog;
+    ArrayList arrayListBrands;
+    String itemGetDataResponse;
+    String brandList;
+    NachoTextView nachoTextViewBrands, nachoTextViewTags;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -65,10 +72,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_sub_category_products);
-
-        productSubCategoryId = getIntent().getStringExtra("product_sub_category_id");
-        productSubCategoryName = getIntent().getStringExtra("product_sub_category_name");
+        setContentView(R.layout.activity_home);
 
         View view = getLayoutInflater().inflate(R.layout.custom_actionbar_product_categories, null);
         ActionBar.LayoutParams params = new ActionBar.LayoutParams(
@@ -76,11 +80,11 @@ public class HomeActivity extends AppCompatActivity {
                 ActionBar.LayoutParams.MATCH_PARENT,
                 Gravity.LEFT);
         TextView Title = (TextView) view.findViewById(R.id.actionbar_title);
-        Title.setText(productSubCategoryName);
+        Title.setText("Items");
         getSupportActionBar().setCustomView(view,params);
         getSupportActionBar().setDisplayShowCustomEnabled(true); //show custom title
         getSupportActionBar().setDisplayShowTitleEnabled(false); //hide the default title
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         Point size = new Point();
         getWindowManager().getDefaultDisplay().getSize(size);
@@ -91,18 +95,19 @@ public class HomeActivity extends AppCompatActivity {
         linearLayoutNoResult.setVisibility(View.INVISIBLE);
 
         listArrayProducts = new ArrayList<>();
-        requestQueueProducts = Volley.newRequestQueue(ListSubCategoryProductsActivity.this);
+        requestQueueProducts = Volley.newRequestQueue(HomeActivity.this);
         mRecyclerProducts = (RecyclerView) findViewById(R.id.ProductsRecyclerView);
         //layoutManager = new LinearLayoutManager(MobileAccessoriesActivity.this);
 
-        layoutManager = new GridLayoutManager(ListSubCategoryProductsActivity.this, 2);
+        layoutManager = new GridLayoutManager(HomeActivity.this, 2);
         mRecyclerProducts.setLayoutManager(layoutManager);
 
         mRecyclerProducts.setLayoutManager(layoutManager);
-        mAdapterProducts = new AdapterProducts(listArrayProducts,ListSubCategoryProductsActivity.this, dpHeight, dpWidth, productSubCategoryId, productSubCategoryName);
+        mAdapterProducts = new AdapterProducts(listArrayProducts,HomeActivity.this, dpHeight, dpWidth, productSubCategoryId, productSubCategoryName);
         mRecyclerProducts.setAdapter(mAdapterProducts);
 
         getProductDetails();
+
     }
 
     @Override
@@ -115,7 +120,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // R.menu.mymenu is a reference to an xml file named mymenu.xml which should be inside your res/menu directory.
         // If you don't have res/menu, just create a directory named "menu" inside res
-        getMenuInflater().inflate(R.menu.menu_product_categories, menu);
+        getMenuInflater().inflate(R.menu.menu_home, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -124,15 +129,206 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.cart_button) {
-            Intent intent = new Intent(ListSubCategoryProductsActivity.this, CartActivity.class);
-            startActivity(intent);
-        }else if(id == android.R.id.home){
-            finish();
-            onBackPressed();
+//        if (id == R.id.cart_button) {
+//            Intent intent = new Intent(HomeActivity.this, CartActivity.class);
+//            startActivity(intent);
+//        }else
+        if(id == R.id.filter){
+            androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(HomeActivity.this);
+            LayoutInflater inflater = HomeActivity.this.getLayoutInflater();
+            final View viewDialog=inflater.inflate(R.layout.dialog_filter, null);
+            alertDialogBuilder.setView(viewDialog);
+            final androidx.appcompat.app.AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+            alertDialog.setCancelable(true);
+            TextView textViewMessageHead=(TextView)viewDialog.findViewById(R.id.textViewMessageHead);
+            textViewMessageHead.setText("FILTER ITEMS");
+            Button button1 = (Button) viewDialog.findViewById(R.id.button1);
+            button1.setText("SUBMIT");
+            button1.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v)
+                {
+                    try {
+                        alertDialog.cancel();
+                    } catch (Exception e){}
+                    Log.i("location", nachoTextViewBrands.getAllChips() + "brands");
+                    Log.i("location", nachoTextViewTags.getAllChips() + "items");
+
+                    try {
+                        ArrayList<String> selectedBrandIds = new ArrayList<String>();
+                        JSONArray jsonArray=new JSONArray(brandList);
+                        if (jsonArray.length() != 0) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject json = null;
+                                json = jsonArray.getJSONObject(i);
+                                for (int j = 0; j < nachoTextViewBrands.getAllChips().size(); j++) {
+                                    if(json.getString("name").equals(nachoTextViewBrands.getAllChips().get(j))){
+                                        try {
+                                            selectedBrandIds.add(json.getString("id"));
+                                            Log.i("location", json.getString("name") + "brandList name, " + nachoTextViewBrands.getAllChips().get(j) + "nacho name");
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        Log.i("location", String.valueOf(selectedBrandIds) + "brandIds");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+//                    getProductDetails();
+                }
+            });
+            SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("AppDetails", MODE_PRIVATE);
+
+            brandList = sharedPreferences.getString("brand_list", "");
+            arrayListBrands=new ArrayList<>();
+            try {
+                JSONArray jsonArray = null;
+                jsonArray = new JSONArray(brandList);
+                if (jsonArray.length() != 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject json = null;
+                        json = jsonArray.getJSONObject(i);
+                        arrayListBrands.add(json.getString("name"));
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            ArrayAdapter<String> adapterBrands = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, arrayListBrands);
+            nachoTextViewBrands = (NachoTextView) viewDialog.findViewById(R.id.nachoTextViewBrands);
+            nachoTextViewBrands.setAdapter(adapterBrands);
+
+            ArrayList arrayListTags = new ArrayList<>();
+            String itemList = sharedPreferences.getString("item_list", "");
+            try {
+                JSONArray jsonArray = null;
+                jsonArray = new JSONArray(itemList);
+                if (jsonArray.length() != 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject json = null;
+                        json = jsonArray.getJSONObject(i);
+                        arrayListTags.add(json.getString("name"));
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+//            String metaTagList = sharedPreferences.getString("meta_tag_list", "");
+//            try {
+//                JSONArray jsonArray = null;
+//                jsonArray = new JSONArray(metaTagList);
+//                if (jsonArray.length() != 0) {
+//                    for (int i = 0; i < jsonArray.length(); i++) {
+//                        JSONObject json = null;
+//                        json = jsonArray.getJSONObject(i);
+//                        arrayListTags.add(json.getString("name"));
+//                    }
+//                }
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+            ArrayAdapter<String> adapterTags = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, arrayListTags);
+            nachoTextViewTags = (NachoTextView) viewDialog.findViewById(R.id.nachoTextViewTags);
+            nachoTextViewTags.setAdapter(adapterTags);
+
+//            nachoTextView.setOnChipClickListener(new NachoTextView.OnChipClickListener() {
+//                @Override
+//                public void onChipClick(Chip chip, MotionEvent motionEvent) {
+//
+//                    Log.i("location", nachoTextView.getAllChips() + "hi");
+//                    // Iterate over all of the chips in the NachoTextView
+//                    for (Chip chipitem : nachoTextView.getAllChips()) {
+//                        // Do something with the text of each chip
+//                        CharSequence text = chipitem.getText();
+//                        // Do something with the data of each chip (this data will be set if the chip was created by tapping a suggestion)
+//                        Object data = chipitem.getData();
+//                        Log.i("location", text + "," + data);
+//                    }
+//                }
+//            });
+
+//            textViewBrand.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    // Initialize dialog
+//                    dialog=new Dialog(HomeActivity.this);
+//
+//                    // set custom dialog
+//                    dialog.setContentView(R.layout.dialog_searchable_spinner);
+//
+//                    // set custom height and width
+//                    dialog.getWindow().setLayout(650,800);
+//
+//                    // set transparent background
+//                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//
+//                    // show dialog
+//                    dialog.show();
+//
+//                    // Initialize and assign variable
+//                    EditText editText=dialog.findViewById(R.id.edit_text);
+//                    ListView listView=dialog.findViewById(R.id.list_view);
+//
+//                    // Initialize array adapter
+//                    ArrayAdapter<String> adapter=new ArrayAdapter<>(HomeActivity.this, android.R.layout.simple_list_item_1,arrayListBrands);
+//
+//                    // set adapter
+//                    listView.setAdapter(adapter);
+//                    editText.addTextChangedListener(new TextWatcher() {
+//                        @Override
+//                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                            adapter.getFilter().filter(s);
+//                        }
+//
+//                        @Override
+//                        public void afterTextChanged(Editable editable) {
+//
+//                        }
+//
+//                    });
+//
+//                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                            // when item selected from list
+//                            // set selected item on textView
+//                            textViewBrand.setText(adapter.getItem(position));
+//
+//                            try {
+//                                JSONArray jsonArray = new JSONArray(brandList);
+//                                if (jsonArray.length() != 0) {
+//                                    for (int i = 0; i < jsonArray.length(); i++) {
+//                                        JSONObject json = null;
+//                                        json = jsonArray.getJSONObject(i);
+//                                        if(json.getString("name").equals(adapter.getItem(position))){
+//                                                selectedBrandId = json.getString("id");
+//                                                Log.i("location", selectedBrandId + "Hai");
+//                                        }
+//                                    }
+//                                }
+//                            } catch (JSONException e) {
+//                                e.printStackTrace();
+//                            }
+//
+//                            // Dismiss dialog
+//                            dialog.dismiss();
+//                        }
+//                    });
+//                }
+//            });
+
         }else if (id == R.id.search_button) {
-            Intent intent = new Intent(ListSubCategoryProductsActivity.this, SearchActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+//            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -140,7 +336,7 @@ public class HomeActivity extends AppCompatActivity {
     private void getProductDetails() {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        LayoutInflater inflater = ListSubCategoryProductsActivity.this.getLayoutInflater();
+        LayoutInflater inflater = HomeActivity.this.getLayoutInflater();
         alertDialogBuilder.setView(inflater.inflate(R.layout.please_wait_dialog, null));
         alertDialogPleaseWait = alertDialogBuilder.create();
         alertDialogPleaseWait.show();
@@ -150,11 +346,12 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences sharedPreferencesHostAddress = getApplicationContext().getSharedPreferences("HostAddress", MODE_PRIVATE);
         String hostAddress = sharedPreferencesHostAddress.getString("hostAddress", getString(R.string.host_address));
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, hostAddress + "phpfiles/getSubCategoryProducts118.php",
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, hostAddress + "items/getdata",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
+                        itemGetDataResponse = response;
                         Log.i("location", "Inside onResponse" + response);
 
                         try {
@@ -166,10 +363,11 @@ public class HomeActivity extends AppCompatActivity {
 //                            final ProgressBar progressBar = (ProgressBar) rootView.findViewById(R.id.progressBarTaxi);
 //                            final TextView textViewPleaseWait = (TextView) rootView.findViewById(R.id.taxiPleaseWait);
 
-                        //Displaying Progressbar
+//                        Displaying Progressbar
 //                            progressBar.setVisibility(View.VISIBLE);
                         try {
-                            JSONArray jsonArray = new JSONArray(response);
+                            JSONObject jsonResponse = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray(jsonResponse.getString("item_list"));
                             if (jsonArray.length() != 0) {
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -178,16 +376,17 @@ public class HomeActivity extends AppCompatActivity {
                                     json = jsonArray.getJSONObject(i);
 
                                     //Adding data to the superhero object
-                                    storeDetailsInventory.setProductId(json.getString("product_id"));
-                                    storeDetailsInventory.setProductImage(json.getString("image_name"));
-                                    storeDetailsInventory.setProductName(json.getString("product_name"));
-                                    storeDetailsInventory.setPurchasePrice(json.getString("purchase_price"));
-                                    storeDetailsInventory.setMrp(json.getString("mrp"));
-                                    storeDetailsInventory.setSalePrice(json.getString("sale_price"));
-                                    storeDetailsInventory.setProductUnitSymbol(json.getString("unit_symbol"));
-                                    storeDetailsInventory.setProductUnitValue(json.getString("unit_value"));
-                                    storeDetailsInventory.setShopName(json.getString("shop_name"));
-                                    storeDetailsInventory.setInStock(json.getString("in_stock_full_count"));
+//                                    storeDetailsInventory.setProductId(json.getString("product_id"));
+//                                    storeDetailsInventory.setProductImage(json.getString("image_name"));
+                                    storeDetailsInventory.setProductName(json.getString("name"));
+                                    Log.i("location home", "test" + json.getString("name"));
+//                                    storeDetailsInventory.setPurchasePrice(json.getString("purchase_price"));
+//                                    storeDetailsInventory.setMrp(json.getString("mrp"));
+//                                    storeDetailsInventory.setSalePrice(json.getString("sale_price"));
+//                                    storeDetailsInventory.setProductUnitSymbol(json.getString("unit_symbol"));
+//                                    storeDetailsInventory.setProductUnitValue(json.getString("unit_value"));
+//                                    storeDetailsInventory.setShopName(json.getString("shop_name"));
+//                                    storeDetailsInventory.setInStock(json.getString("in_stock_full_count"));
 
                                     listArrayProducts.add(storeDetailsInventory);
                                 }
@@ -199,7 +398,7 @@ public class HomeActivity extends AppCompatActivity {
                         }
 
                         try{
-                            Bundle extras = ListSubCategoryProductsActivity.this.getIntent().getExtras();
+                            Bundle extras = HomeActivity.this.getIntent().getExtras();
                             if (extras.getString("recyclerviewPosition") != null) {
 //                                Log.i("location", "inside scrollToPosition" + extras.getString("recyclerviewPosition"));
                                 mRecyclerProducts.scrollToPosition(Integer.parseInt(extras.getString("recyclerviewPosition")));
@@ -228,7 +427,7 @@ public class HomeActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-//                        Log.i("location", "Inside onErrorResponse" + error);
+                        Log.i("location", "Inside onErrorResponse" + error);
 
                         if (count < 2) {
                             count++;
@@ -249,8 +448,8 @@ public class HomeActivity extends AppCompatActivity {
                             } catch (Exception e) {
                             }
 
-                            androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(ListSubCategoryProductsActivity.this);
-                            LayoutInflater inflater = ListSubCategoryProductsActivity.this.getLayoutInflater();
+                            androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(HomeActivity.this);
+                            LayoutInflater inflater = HomeActivity.this.getLayoutInflater();
                             final View viewDialog=inflater.inflate(R.layout.dialog_2_buttons, null);
                             alertDialogBuilder.setView(viewDialog);
                             final androidx.appcompat.app.AlertDialog alertDialog = alertDialogBuilder.create();
@@ -285,11 +484,22 @@ public class HomeActivity extends AppCompatActivity {
 
                     }
                 }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                SharedPreferences sharedPreferencesUserDetails = getApplicationContext().getSharedPreferences("UserDetails", MODE_PRIVATE);
+                final String token = sharedPreferencesUserDetails.getString("token", "");
+                Log.i("location home", token);
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + token);
+                return params;
+            }
+
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("product_sub_category_id", productSubCategoryId);
-                params.put("product_sub_category_name", productSubCategoryName);
                 return params;
             }
         };

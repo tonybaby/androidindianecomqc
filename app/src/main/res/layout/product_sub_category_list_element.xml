@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="1dp"
+    android:paddingBottom="0dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:id="@+id/linearLayoutProductSubCategory"
+    android:orientation="vertical"
+    android:background="@drawable/border">
+
+<!--    <androidx.cardview.widget.CardView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:clickable="false"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:background="#00dbd9d9">-->
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:id="@+id/imageViewProduct"
+                    android:layout_gravity="center"
+                    android:cropToPadding="false"
+                    android:scaleType="fitXY"
+                    android:layout_margin="2dp"/>
+
+                    <TextView
+                        android:id="@+id/textViewProductSubCategoryName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:gravity="center"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Name"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="#000000"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"/>
+        </LinearLayout>
+<!--    </androidx.cardview.widget.CardView>-->
+
+    <TextView
+        android:id="@+id/textViewProductSubCategoryId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:visibility="invisible"/>
+</LinearLayout>

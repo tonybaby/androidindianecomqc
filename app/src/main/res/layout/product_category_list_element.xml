@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/linearLayoutProductCategory"
+    android:orientation="vertical"
+    app:tabBackground="@android:color/transparent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:layout_alignParentTop="true"
+        android:layout_margin=".5dp"
+        android:background="#00dbd9d9"
+        app:tabBackground="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/drawer_list_selector"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left">
+
+                    <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:id="@+id/imageViewProduct"
+                            android:layout_gravity="center"
+                            android:cropToPadding="false"
+                        android:scaleType="fitXY"
+                        android:layout_marginTop="2dp" />
+
+                    <!--<ProgressBar-->
+                        <!--style="?android:attr/progressBarStyleSmall"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:id="@+id/PBTaxiImage"-->
+                        <!--android:layout_centerInParent="true"-->
+                        <!--android:indeterminate="false" />-->
+                </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="10"
+                    app:tabBackground="@android:color/transparent"
+                    android:background="#ffffff">
+                    <LinearLayout
+                        android:id="@+id/LLInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="0dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="9">
+
+                        <TextView
+                            android:id="@+id/textViewProductCategoryName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="2dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text=""
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textViewProductCategoryDescription"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="3"
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/imageViewArrowDown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/arrow_down"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1">
+                    </ImageView>
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_view_subcategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:layout_margin="8dp"
+                android:background="@drawable/border"
+                app:cardElevation="1dp"
+                app:cardCornerRadius="2dp">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerviewProductSubCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/textViewProductCategoryId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:visibility="invisible"/>
+</LinearLayout>

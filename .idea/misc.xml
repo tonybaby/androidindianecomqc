@@ -3,12 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../../../layout/custom_preview.xml" value="0.12760416666666666" />
+        <entry key="../../../../../.gradle/caches/transforms-3/f06daf023f894f01c32cb97c46266c4b/transformed/jetified-MultiSelectSpinner-1.0.1/res/layout/alert_dialog_listview_search.xml" value="0.23489583333333333" />
+        <entry key="../../../../../.gradle/caches/transforms-3/f06daf023f894f01c32cb97c46266c4b/transformed/jetified-MultiSelectSpinner-1.0.1/res/layout/item_listview_multiple.xml" value="0.23489583333333333" />
+        <entry key="../../../../../.gradle/caches/transforms-3/f06daf023f894f01c32cb97c46266c4b/transformed/jetified-MultiSelectSpinner-1.0.1/res/layout/item_listview_single.xml" value="0.23489583333333333" />
+        <entry key="../../../../../.gradle/caches/transforms-3/f06daf023f894f01c32cb97c46266c4b/transformed/jetified-MultiSelectSpinner-1.0.1/res/layout/textview_for_spinner.xml" value="0.23489583333333333" />
+        <entry key="../../../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_dropdown_item_1line.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1345" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1345" />
         <entry key="app/src/main/res/drawable/shape_submit_button_white.xml" value="0.1345" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/activity_list_sub_category_products.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/custom_actionbar_product_categories.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_2_buttons.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_contact_us.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_filter.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_normal.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_searchable_spinner.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_user_exists.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/layout/please_wait_dialog.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/product_list_element.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.10104166666666667" />
+        <entry key="app/src/main/res/menu/home.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/menu/main.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/menu/menu_product_categories.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/menu/menu_product_categories_temp.xml" value="0.23489583333333333" />
       </map>
     </option>
   </component>

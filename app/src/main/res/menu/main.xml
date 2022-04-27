@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/cart_button"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/cart"
+        />
+    <item
+        android:id="@+id/termsAndConditions"
+        android:title="Terms and Conditions"
+        android:orderInCategory="1">
+    </item>
+    <item
+        android:id="@+id/sign_out_option"
+        android:title="Sign out"
+        android:orderInCategory="1">
+    </item>
+</menu>

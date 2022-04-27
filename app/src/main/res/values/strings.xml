@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Indianecomqc</string>
     <string name="host_address">http://indianecomqc.mthinfotech.com/api/</string>
+<!--    <string name="default_web_client_id">384982433374-0g94oscme35dfmotqg2bjaab9hhfoqgm.apps.googleusercontent.com</string>-->
     <string name="title_activity_sign_in">SignInActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -10,4 +11,160 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
+    <string name="menu_home">MTH Store</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <string-array name="service_type_array">
+        <item>Select Service Type</item>
+        <item>New Sim</item>
+        <item>Duplicate Sim</item>
+        <item>4G Upgradation</item>
+    </string-array>
+
+    <string-array name="plan_array">
+        <item>Select Plan</item>
+    </string-array>
+
+    <string-array name="unit_array">
+        <item>1 Kg</item>
+    </string-array>
+
+    <string name="title_activity_fullscreen_alert_dialog">FullscreenAlertDialogActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_set_delivery_location">Map</string>
+
+    <string name="title_activity_blocking_update_dialog">BlockingUpdateDialogActivity</string>
+    <string-array name="mood_array">
+        <item>Accepted</item>
+        <item>Accomplished</item>
+        <item>Aggravated</item>
+        <item>Alone</item>
+        <item>Amused</item>
+        <item>Angry</item>
+        <item>Annoyed</item>
+        <item>Anxious</item>
+        <item>Apathetic</item>
+        <item>Ashamed</item>
+        <item>Awake</item>
+        <item>Bewildered</item>
+        <item>Bitchy</item>
+        <item>Bittersweet</item>
+        <item>Blah</item>
+        <item>Blank</item>
+        <item>Blissful</item>
+        <item>Bored</item>
+        <item>Bouncy</item>
+        <item>Calm</item>
+        <item>Cheerful</item>
+        <item>Chipper</item>
+        <item>Cold</item>
+        <item>Complacent</item>
+        <item>Confused</item>
+        <item>Content</item>
+        <item>Cranky</item>
+        <item>Crappy</item>
+        <item>Crazy</item>
+        <item>Crushed</item>
+        <item>Curious</item>
+        <item>Cynical</item>
+        <item>Dark</item>
+        <item>Depressed</item>
+        <item>Determined</item>
+        <item>Devious</item>
+        <item>Dirty</item>
+        <item>Disappointed</item>
+        <item>Discontent</item>
+        <item>Ditzy</item>
+        <item>Dorky</item>
+        <item>Drained</item>
+        <item>Drunk</item>
+        <item>Ecstatic</item>
+        <item>Energetic</item>
+        <item>Enraged</item>
+        <item>Enthralled</item>
+        <item>Envious</item>
+        <item>Exanimate</item>
+        <item>Excited</item>
+        <item>Exhausted</item>
+        <item>Flirty</item>
+        <item>Frustrated</item>
+        <item>Full</item>
+        <item>Geeky</item>
+        <item>Giddy</item>
+        <item>Giggly</item>
+        <item>Gloomy</item>
+        <item>Good</item>
+        <item>Grateful</item>
+        <item>Groggy</item>
+        <item>Grumpy</item>
+        <item>Guilty</item>
+        <item>Happy</item>
+        <item>High</item>
+        <item>Hopeful</item>
+        <item>Hot</item>
+        <item>Hungry</item>
+        <item>Hyper</item>
+        <item>Impressed</item>
+        <item>Indescribable</item>
+        <item>Indifferent</item>
+        <item>Infuriated</item>
+        <item>Irate</item>
+        <item>Irritated</item>
+        <item>Jealous</item>
+        <item>Jubilant</item>
+        <item>Lazy</item>
+        <item>Lethargic</item>
+        <item>Listless</item>
+        <item>Lonely</item>
+        <item>Loved</item>
+        <item>Mad</item>
+        <item>Melancholy</item>
+        <item>Mellow</item>
+        <item>Mischievous</item>
+        <item>Moody</item>
+        <item>Morose</item>
+        <item>Naughty</item>
+        <item>Nerdy</item>
+        <item>NotSpecified</item>
+        <item>Numb</item>
+        <item>Okay</item>
+        <item>Optimistic</item>
+        <item>Peaceful</item>
+        <item>Pessimistic</item>
+        <item>Pissedoff</item>
+        <item>Pleased</item>
+        <item>Predatory</item>
+        <item>Quixotic</item>
+        <item>Recumbent</item>
+        <item>Refreshed</item>
+        <item>Rejected</item>
+        <item>Rejuvenated</item>
+        <item>Relaxed</item>
+        <item>Relieved</item>
+        <item>Restless</item>
+        <item>Rushed</item>
+        <item>Sad</item>
+        <item>Satisfied</item>
+        <item>Shocked</item>
+        <item>Sick</item>
+        <item>Silly</item>
+        <item>Sleepy</item>
+        <item>Smart</item>
+        <item>Stressed</item>
+        <item>Surprised</item>
+        <item>Sympathetic</item>
+        <item>Thankful</item>
+        <item>Tired</item>
+        <item>Touched</item>
+        <item>Uncomfortable</item>
+        <item>Weird</item>
+
+    </string-array>
 </resources>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" >
+
+        <ImageView
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:id="@+id/imageView15"
+            android:src="@drawable/warning"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="WARNING"
+            android:id="@+id/TVTitle"
+            android:textColor="#323232"
+            android:textStyle="bold"
+            android:layout_marginLeft="4dp"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="#191919" />
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:scrollIndicators="none"
+        android:id="@+id/scrollViewHome"
+        android:scrollbarSize="0dp"
+        android:layout_alignParentBottom="false"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/TVMessage"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center"
+                android:textColor="#323232"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:text="Something went wrong. Is your internet connection working?" />
+
+            <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.2dp"
+        android:background="#e6e4e4" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="TRY AGAIN"
+                    android:id="@+id/reloadButton"
+                    android:background="@drawable/internet_button_effect_white"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#323232"
+                    android:clickable="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="3dp"
+                    android:layout_weight=".5"
+                    android:onClick="reloadFunction" />
+                <View
+                    android:layout_width="0.2dp"
+                    android:layout_height="fill_parent"
+                    android:background="#e6e4e4" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="EXIT"
+                    android:id="@+id/appExitButton"
+                    android:background="@drawable/internet_button_effect_white"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#323232"
+                    android:clickable="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textStyle="bold"
+                    android:paddingBottom="3dp"
+                    android:paddingTop="3dp"
+                    android:layout_weight=".5"
+                    android:onClick="exitFunction" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+    </LinearLayout>

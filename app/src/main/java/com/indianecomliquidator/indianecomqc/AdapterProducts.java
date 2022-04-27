@@ -137,13 +137,13 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
 
             @Override
             public void onClickRelativeLayoutProduct(final int p) {
-                TextView textViewProductId = (TextView) v.findViewById(R.id.textViewProductId);
-                TextView textViewProductName = (TextView) v.findViewById(R.id.textViewProductName);
-                String productId = textViewProductId.getText().toString();
-                String productName = textViewProductName.getText().toString();
-                Intent intent = new Intent(context, SubCategoryProductDetailsActivity.class);
-                intent.putExtra("product_id", productId);
-                context.startActivity(intent);
+//                TextView textViewProductId = (TextView) v.findViewById(R.id.textViewProductId);
+//                TextView textViewProductName = (TextView) v.findViewById(R.id.textViewProductName);
+//                String productId = textViewProductId.getText().toString();
+//                String productName = textViewProductName.getText().toString();
+//                Intent intent = new Intent(context, SubCategoryProductDetailsActivity.class);
+//                intent.putExtra("product_id", productId);
+//                context.startActivity(intent);
             }
 
             @Override
@@ -253,25 +253,25 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
                     }
                 });
 
-        holder.textViewProductId.setText(storeDetailsInventory.getProductId());
-        holder.textViewProductPage.setText(storeDetailsInventory.getProductId());
+//        holder.textViewProductId.setText(storeDetailsInventory.getProductId());
+//        holder.textViewProductPage.setText(storeDetailsInventory.getProductId());
         holder.textViewProductName.setText(storeDetailsInventory.getProductName());
-        holder.textViewDefaultPurchasePrice.setText(storeDetailsInventory.getDefaultPurchasePrice());
-        holder.textViewDefaultSalePrice.setText(storeDetailsInventory.getDefaultSalePrice());
-        if(!storeDetailsInventory.getSalePrice().equals(storeDetailsInventory.getMrp())) {
-            holder.textViewMrp.setText("\u20B9" + storeDetailsInventory.getMrp());
-            holder.textViewMrp.setPaintFlags(holder.textViewMrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }
-        holder.textViewSalePrice.setText("\u20B9" + storeDetailsInventory.getSalePrice());
-        holder.textViewShopName.setText(storeDetailsInventory.getShopName());
-        holder.textViewStockUnit.setText(" " + storeDetailsInventory.getStockUnit());
-        holder.textViewProductUnitValue.setText(storeDetailsInventory.getProductUnitValue());
-        holder.textViewProductUnitSymbol.setText(" " + storeDetailsInventory.getProductUnitSymbol());
-        holder.textViewRequestCount.setText(storeDetailsInventory.getRequestCount());
-
-        if(storeDetailsInventory.getInStock().equals("0")) {
-            holder.relativeLayoutOutOfStock.setVisibility(View.VISIBLE);
-        }
+//        holder.textViewDefaultPurchasePrice.setText(storeDetailsInventory.getDefaultPurchasePrice());
+//        holder.textViewDefaultSalePrice.setText(storeDetailsInventory.getDefaultSalePrice());
+//        if(!storeDetailsInventory.getSalePrice().equals(storeDetailsInventory.getMrp())) {
+//            holder.textViewMrp.setText("\u20B9" + storeDetailsInventory.getMrp());
+//            holder.textViewMrp.setPaintFlags(holder.textViewMrp.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+//        }
+//        holder.textViewSalePrice.setText("\u20B9" + storeDetailsInventory.getSalePrice());
+//        holder.textViewShopName.setText(storeDetailsInventory.getShopName());
+//        holder.textViewStockUnit.setText(" " + storeDetailsInventory.getStockUnit());
+//        holder.textViewProductUnitValue.setText(storeDetailsInventory.getProductUnitValue());
+//        holder.textViewProductUnitSymbol.setText(" " + storeDetailsInventory.getProductUnitSymbol());
+//        holder.textViewRequestCount.setText(storeDetailsInventory.getRequestCount());
+//
+//        if(storeDetailsInventory.getInStock().equals("0")) {
+//            holder.relativeLayoutOutOfStock.setVisibility(View.VISIBLE);
+//        }
 
 
 

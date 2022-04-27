@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/buttonCustomerCare"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/customer_care"
+        />
+    <item
+        android:id="@+id/buttonNotification"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/notification"
+        />
+    <item
+        android:id="@+id/myProfile"
+        android:title="My Profile"
+        android:orderInCategory="1">
+    </item>
+    <item
+        android:id="@+id/orders"
+        android:title="Orders"
+        android:orderInCategory="1">
+    </item>
+    <item
+        android:id="@+id/contactUs"
+        android:title="Contact Us"
+        android:orderInCategory="1">
+    </item>
+    <item
+        android:id="@+id/aboutUs"
+        android:title="About Us"
+        android:orderInCategory="1">
+    </item>
+    <item
+        android:id="@+id/termsAndConditions"
+        android:title="Terms and Conditions"
+        android:orderInCategory="1">
+    </item>
+    <item
+        android:id="@+id/sign_out_option"
+        android:title="Sign out"
+        android:orderInCategory="1">
+    </item>
+</menu>
