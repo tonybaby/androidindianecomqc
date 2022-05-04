@@ -10,25 +10,67 @@
         <entry key="../../../../../.gradle/caches/transforms-3/f06daf023f894f01c32cb97c46266c4b/transformed/jetified-MultiSelectSpinner-1.0.1/res/layout/textview_for_spinner.xml" value="0.23489583333333333" />
         <entry key="../../../../../Library/Android/sdk/platforms/android-31/data/res/layout/simple_dropdown_item_1line.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1345" />
+        <entry key="app/src/main/res/drawable/above_shadow.xml" value="0.1165" />
+        <entry key="app/src/main/res/drawable/color_cursor.xml" value="0.1345" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1345" />
         <entry key="app/src/main/res/drawable/shape_submit_button_white.xml" value="0.1345" />
+        <entry key="app/src/main/res/font/roboto_medium.xml" value="0.2490740740740741" />
+        <entry key="app/src/main/res/layout/activity_add_defect.xml" value="0.24166666666666667" />
+        <entry key="app/src/main/res/layout/activity_base.xml" value="0.10520833333333333" />
+        <entry key="app/src/main/res/layout/activity_camera.xml" value="0.12" />
+        <entry key="app/src/main/res/layout/activity_defects.xml" value="0.22083333333333333" />
+        <entry key="app/src/main/res/layout/activity_draw_text_on_img.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/activity_edit_image.xml" value="0.2265625" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/activity_list_sub_category_products.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10520833333333333" />
+        <entry key="app/src/main/res/layout/activity_main_photo_editor.xml" value="0.10520833333333333" />
+        <entry key="app/src/main/res/layout/activity_photo_editor.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_product_details.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/add_text_dialog.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/add_text_popup_window.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/chip.xml" value="0.10104166666666667" />
+        <entry key="app/src/main/res/layout/color_picker_item_list.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/custom_actionbar_product_categories.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/day_element.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/defect_image_list_element.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/dialog_2_buttons.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/dialog_contact_us.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/dialog_filter.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_image.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/dialog_image_selector.xml" value="0.23692307692307693" />
         <entry key="app/src/main/res/layout/dialog_normal.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_product_status.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/dialog_searchable_spinner.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/dialog_select_location.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/dialog_select_time_slot.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/dialog_user_exists.xml" value="0.10104166666666667" />
+        <entry key="app/src/main/res/layout/fragment_base.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/fragment_bottom_custom_effect_dialog.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/fragment_bottom_properties_dialog.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/fragment_bottom_shapes_dialog.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/fragment_bottom_sticker_emoji_dialog.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/fragment_main_photo_edit_emoji.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/fragment_main_photo_edit_image.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/fragment_photo_edit_emoji_item_list.xml" value="0.1046875" />
+        <entry key="app/src/main/res/layout/fragment_photo_edit_image_item_list.xml" value="0.1046875" />
         <entry key="app/src/main/res/layout/please_wait_dialog.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/layout/product_list_element.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/layout/row_editing_tools.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/row_emoji.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/row_filter_view.xml" value="0.240625" />
+        <entry key="app/src/main/res/layout/row_sticker.xml" value="0.240625" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.10104166666666667" />
         <entry key="app/src/main/res/menu/home.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/menu/main.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/menu/menu_basic.xml" value="0.2421875" />
+        <entry key="app/src/main/res/menu/menu_defects.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/menu/menu_product_categories.xml" value="0.23489583333333333" />
         <entry key="app/src/main/res/menu/menu_product_categories_temp.xml" value="0.23489583333333333" />
+        <entry key="app/src/main/res/menu/menu_search_activity.xml" value="0.2421875" />
+        <entry key="app/src/main/res/xml/file_paths.xml" value="0.240625" />
       </map>
     </option>
   </component>

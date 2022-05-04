@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:background="#EEEEEE">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                tools:context=".tour.PackageDetails"
+                android:background="#FFFFFF"
+                android:layout_marginBottom="16dp">
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true">
+
+                    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Top Sliding Banners -->
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/RLImageView"
+                            android:orientation="vertical"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center_horizontal">
+
+                            <androidx.viewpager.widget.ViewPager
+                                android:id="@+id/pager"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"/>
+
+                            <!--                            <ProgressBar-->
+                            <!--                                android:layout_width="wrap_content"-->
+                            <!--                                android:layout_height="wrap_content"-->
+                            <!--                                android:id="@+id/PBImageView"-->
+                            <!--                                android:layout_gravity="center"-->
+                            <!--                                android:indeterminate="false" />-->
+                        </LinearLayout>
+
+                        <com.viewpagerindicator.CirclePageIndicator
+                            android:id="@+id/indicator"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="bottom"
+                            app:centered="true"
+                            app:fillColor="#5BC883"
+                            app:pageColor="#FFFFFF"
+                            app:snap="false"
+                            android:paddingBottom="8dp"
+                            android:layout_centerHorizontal="true"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:layout_marginBottom="2dp"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/LLInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="0dp"
+                        android:paddingRight="8dp">
+
+                        <TextView
+                            android:id="@+id/textViewProductName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text="Product Name"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_margin="4dp">
+
+                            <LinearLayout
+                                android:id="@+id/LLRatePerDay"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_weight="9">
+
+                                <TextView
+                                    android:id="@+id/textViewSalePrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="\u20B90"
+                                    android:textAppearance="?android:attr/textAppearanceLarge"
+                                    android:textColor="#4CAF50"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/textViewMrp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="4dp"
+                                    android:text=""
+                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--                    <androidx.recyclerview.widget.RecyclerView-->
+                    <!--                        android:id="@+id/recyclerviewProductVariants"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_gravity="center"-->
+                    <!--                        android:paddingLeft="8dp"-->
+                    <!--                        android:paddingRight="8dp"/>-->
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutProductDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#ffffff">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:text="Product Details"
+                    android:padding="12dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                <LinearLayout
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:background="#5BC883"></LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerviewProductDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/relativeLayoutAddToCart"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#58C27F"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:clickable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="NEXT"
+                android:textStyle="bold"
+                android:id="@+id/textView19"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="toShowProductStatusDialog"/>
+
+            <!--            <Button-->
+            <!--                style="?android:attr/buttonStyleSmall"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="40dp"-->
+            <!--                android:text="Reload"-->
+            <!--                android:id="@+id/button14"-->
+            <!--                android:background="@drawable/shape_reload_button"-->
+            <!--                android:paddingLeft="20dp"-->
+            <!--                android:paddingRight="20dp"-->
+            <!--                android:layout_alignParentRight="true"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:textColor="#4CAF50"-->
+            <!--                android:onClick="reloadFunction" />-->
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

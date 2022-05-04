@@ -22,4 +22,7 @@
     <style name="Theme.Indianecomqc.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Indianecomqc.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="ChipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 </resources>

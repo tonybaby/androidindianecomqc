@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Paint;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,24 +35,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHolder> {
+public class AdapterRecyclerviewDefectImages extends RecyclerView.Adapter<AdapterRecyclerviewDefectImages.ViewHolder> {
     private Context context;
     int dpHeight;
     int dpWidth;
 
     //List to store all
-    private List<StoreDetailsInventory> Details;
-    private List<StoreDetailsInventory> DetailsFull;
+    private List<StoreDetailsDefectImages> Details;
+    private List<StoreDetailsDefectImages> DetailsFull;
 
     private int mPreviousPosition = 0;
-    StoreDetailsInventory storeDetailsInventory;
+    StoreDetailsDefectImages storeDetailsDefectImages;
     ClickListener listener;
     AlertDialog alertDialog, alertDialogPleaseWait;
     int count = 0;
     String productSubCategoryId, productSubCategoryName;
 
     //Constructor of this class
-    AdapterProducts(List<StoreDetailsInventory> Details, Context context, int dpHeight, int dpWidth, String productSubCategoryId, String productSubCategoryName){
+    AdapterRecyclerviewDefectImages(List<StoreDetailsDefectImages> Details, Context context, int dpHeight, int dpWidth){
         super();
         //Getting all
         this.Details = Details;
@@ -229,13 +228,13 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
         //Getting the particular item from the list
-        storeDetailsInventory =  Details.get(position);
+        storeDetailsDefectImages =  Details.get(position);
 
         String hostAddress;
         SharedPreferences sharedPreferencesHostAddress = context.getSharedPreferences("HostAddress", MODE_PRIVATE);
         hostAddress = sharedPreferencesHostAddress.getString("hostAddress", context.getString(R.string.host_address));
 
-        Uri uri = Uri.parse(hostAddress + "images/products/" + storeDetailsInventory.getProductImage());
+        Uri uri = Uri.parse(hostAddress + "images/products/" + storeDetailsDefectImages.getProductImage());
 
         final Context context = holder.imageViewProduct.getContext();
         Picasso.with(context)
@@ -253,9 +252,9 @@ public class AdapterProducts extends RecyclerView.Adapter<AdapterProducts.ViewHo
                     }
                 });
 
-        holder.textViewProductId.setText(storeDetailsInventory.getProductId());
-//        holder.textViewProductPage.setText(storeDetailsInventory.getProductId());
-        holder.textViewProductName.setText(storeDetailsInventory.getProductName());
+//        holder.textViewProductId.setText(storeDetailsInventory.getProductId());
+////        holder.textViewProductPage.setText(storeDetailsInventory.getProductId());
+//        holder.textViewProductName.setText(storeDetailsInventory.getProductName());
 //        holder.textViewDefaultPurchasePrice.setText(storeDetailsInventory.getDefaultPurchasePrice());
 //        holder.textViewDefaultSalePrice.setText(storeDetailsInventory.getDefaultSalePrice());
 //        if(!storeDetailsInventory.getSalePrice().equals(storeDetailsInventory.getMrp())) {

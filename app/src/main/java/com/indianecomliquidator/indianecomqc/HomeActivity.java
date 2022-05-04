@@ -20,7 +20,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -44,7 +46,7 @@ import java.util.Map;
 
 public class HomeActivity extends AppCompatActivity {
 
-    public static List<StoreDetailsInventory> listArrayProducts;
+    public static List<StoreDetailsInventory> listArrayProducts, listArrayProductsFiltered;
     private static RecyclerView mRecyclerProducts;
     private RecyclerView.LayoutManager layoutManager;
     static RequestQueue requestQueueProducts;
@@ -58,8 +60,10 @@ public class HomeActivity extends AppCompatActivity {
     Dialog dialog;
     ArrayList arrayListBrands;
     String itemGetDataResponse;
-    String brandList;
+    String brandList, itemList;
     NachoTextView nachoTextViewBrands, nachoTextViewTags;
+    ArrayList<String> selectedItemIds, selectedBrandIds;
+    EditText editTextMinimumPrice, editTextMaximumPrice;
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -93,18 +97,6 @@ public class HomeActivity extends AppCompatActivity {
 
         linearLayoutNoResult = (LinearLayout) findViewById(R.id.linearLayoutNoResult);
         linearLayoutNoResult.setVisibility(View.INVISIBLE);
-
-        listArrayProducts = new ArrayList<>();
-        requestQueueProducts = Volley.newRequestQueue(HomeActivity.this);
-        mRecyclerProducts = (RecyclerView) findViewById(R.id.ProductsRecyclerView);
-        //layoutManager = new LinearLayoutManager(MobileAccessoriesActivity.this);
-
-        layoutManager = new GridLayoutManager(HomeActivity.this, 2);
-        mRecyclerProducts.setLayoutManager(layoutManager);
-
-        mRecyclerProducts.setLayoutManager(layoutManager);
-        mAdapterProducts = new AdapterProducts(listArrayProducts,HomeActivity.this, dpHeight, dpWidth, productSubCategoryId, productSubCategoryName);
-        mRecyclerProducts.setAdapter(mAdapterProducts);
 
         getProductDetails();
 
@@ -145,27 +137,26 @@ public class HomeActivity extends AppCompatActivity {
             textViewMessageHead.setText("FILTER ITEMS");
             Button button1 = (Button) viewDialog.findViewById(R.id.button1);
             button1.setText("SUBMIT");
+            editTextMinimumPrice = (EditText) viewDialog.findViewById(R.id.editTextMinPrice);
+            editTextMaximumPrice = (EditText) viewDialog.findViewById(R.id.editTextMaxPrice);
             button1.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v)
                 {
                     try {
                         alertDialog.cancel();
                     } catch (Exception e){}
-                    Log.i("location", nachoTextViewBrands.getAllChips() + "brands");
-                    Log.i("location", nachoTextViewTags.getAllChips() + "items");
 
                     try {
-                        ArrayList<String> selectedBrandIds = new ArrayList<String>();
+                        selectedBrandIds = new ArrayList<String>();
                         JSONArray jsonArray=new JSONArray(brandList);
                         if (jsonArray.length() != 0) {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject json = null;
                                 json = jsonArray.getJSONObject(i);
                                 for (int j = 0; j < nachoTextViewBrands.getAllChips().size(); j++) {
-                                    if(json.getString("name").equals(nachoTextViewBrands.getAllChips().get(j))){
+                                    if(json.getString("name").equals(String.valueOf(nachoTextViewBrands.getAllChips().get(j)))){
                                         try {
                                             selectedBrandIds.add(json.getString("id"));
-                                            Log.i("location", json.getString("name") + "brandList name, " + nachoTextViewBrands.getAllChips().get(j) + "nacho name");
                                         } catch (JSONException e) {
                                             e.printStackTrace();
                                         }
@@ -173,12 +164,35 @@ public class HomeActivity extends AppCompatActivity {
                                 }
                             }
                         }
-                        Log.i("location", String.valueOf(selectedBrandIds) + "brandIds");
+                        Log.i("location", "selectedBrandIds" + selectedBrandIds);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
 
-//                    getProductDetails();
+                    try {
+                        selectedItemIds = new ArrayList<String>();
+                        JSONArray jsonArray=new JSONArray(itemList);
+                        if (jsonArray.length() != 0) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject json = null;
+                                json = jsonArray.getJSONObject(i);
+                                for (int j = 0; j < nachoTextViewTags.getAllChips().size(); j++) {
+                                    if(json.getString("name").equals(String.valueOf(nachoTextViewTags.getAllChips().get(j)))){
+                                        try {
+                                            selectedItemIds.add(json.getString("id"));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        Log.i("location", "selectedItemIds" + selectedItemIds);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    getProductDetailsFiltered();
                 }
             });
             SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("AppDetails", MODE_PRIVATE);
@@ -203,7 +217,7 @@ public class HomeActivity extends AppCompatActivity {
             nachoTextViewBrands.setAdapter(adapterBrands);
 
             ArrayList arrayListTags = new ArrayList<>();
-            String itemList = sharedPreferences.getString("item_list", "");
+            itemList = sharedPreferences.getString("item_list", "");
             try {
                 JSONArray jsonArray = null;
                 jsonArray = new JSONArray(itemList);
@@ -335,6 +349,14 @@ public class HomeActivity extends AppCompatActivity {
 
     private void getProductDetails() {
 
+        listArrayProducts = new ArrayList<>();
+        requestQueueProducts = Volley.newRequestQueue(HomeActivity.this);
+        mRecyclerProducts = (RecyclerView) findViewById(R.id.ProductsRecyclerView);
+        layoutManager = new GridLayoutManager(HomeActivity.this, 2);
+        mRecyclerProducts.setLayoutManager(layoutManager);
+        mAdapterProducts = new AdapterProducts(listArrayProducts,HomeActivity.this, dpHeight, dpWidth, productSubCategoryId, productSubCategoryName);
+        mRecyclerProducts.setAdapter(mAdapterProducts);
+
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = HomeActivity.this.getLayoutInflater();
         alertDialogBuilder.setView(inflater.inflate(R.layout.please_wait_dialog, null));
@@ -367,6 +389,14 @@ public class HomeActivity extends AppCompatActivity {
 //                            progressBar.setVisibility(View.VISIBLE);
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
+
+                            SharedPreferences pref = getApplicationContext().getSharedPreferences("AppDetails", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("defect_type_list", jsonResponse.getString("defect_type_list"));
+                            editor.commit();
+
+                            Log.i("location", jsonResponse.getString("defect_type_list"));
+
                             JSONArray jsonArray = new JSONArray(jsonResponse.getString("item_list"));
                             if (jsonArray.length() != 0) {
 
@@ -376,10 +406,10 @@ public class HomeActivity extends AppCompatActivity {
                                     json = jsonArray.getJSONObject(i);
 
                                     //Adding data to the superhero object
-//                                    storeDetailsInventory.setProductId(json.getString("product_id"));
+                                    storeDetailsInventory.setProductId(json.getString("id"));
 //                                    storeDetailsInventory.setProductImage(json.getString("image_name"));
                                     storeDetailsInventory.setProductName(json.getString("name"));
-                                    Log.i("location home", "test" + json.getString("name"));
+                                    Log.i("location home", "test" + json.getString("name") + "," + json.getString("id"));
 //                                    storeDetailsInventory.setPurchasePrice(json.getString("purchase_price"));
 //                                    storeDetailsInventory.setMrp(json.getString("mrp"));
 //                                    storeDetailsInventory.setSalePrice(json.getString("sale_price"));
@@ -500,6 +530,165 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+        };
+        requestQueueProducts.add(stringRequest);
+    }
+
+    private void getProductDetailsFiltered() {
+
+        listArrayProducts = new ArrayList<>();
+        requestQueueProducts = Volley.newRequestQueue(HomeActivity.this);
+        mRecyclerProducts = (RecyclerView) findViewById(R.id.ProductsRecyclerView);
+
+        layoutManager = new GridLayoutManager(HomeActivity.this, 2);
+        mRecyclerProducts.setLayoutManager(layoutManager);
+
+        mRecyclerProducts.setLayoutManager(layoutManager);
+        mAdapterProducts = new AdapterProducts(listArrayProducts,HomeActivity.this, dpHeight, dpWidth, productSubCategoryId, productSubCategoryName);
+        mRecyclerProducts.setAdapter(mAdapterProducts);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = HomeActivity.this.getLayoutInflater();
+        alertDialogBuilder.setView(inflater.inflate(R.layout.please_wait_dialog, null));
+        alertDialogPleaseWait = alertDialogBuilder.create();
+        alertDialogPleaseWait.show();
+        alertDialogPleaseWait.setCancelable(false);
+
+        //To get host address got from firebase.
+        SharedPreferences sharedPreferencesHostAddress = getApplicationContext().getSharedPreferences("HostAddress", MODE_PRIVATE);
+        String hostAddress = sharedPreferencesHostAddress.getString("hostAddress", getString(R.string.host_address));
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, hostAddress + "items/getdatafiltered",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        itemGetDataResponse = response;
+                        Log.i("location", "Inside onResponse" + response);
+
+                        try {
+                            JSONObject jsonResponse = new JSONObject(response);
+                            JSONArray jsonArray = new JSONArray(jsonResponse.getString("item_list"));
+                            if (jsonArray.length() != 0) {
+                                linearLayoutNoResult.setVisibility(View.INVISIBLE);
+
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    StoreDetailsInventory storeDetailsInventory = new StoreDetailsInventory();
+                                    JSONObject json = null;
+                                    json = jsonArray.getJSONObject(i);
+                                    storeDetailsInventory.setProductName(json.getString("name"));
+//                                    Log.i("location home", "test" + json.getString("name"));
+                                    listArrayProducts.add(storeDetailsInventory);
+                                }
+                            }else{
+                                linearLayoutNoResult.setVisibility(View.VISIBLE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        try{
+                            Bundle extras = HomeActivity.this.getIntent().getExtras();
+                            if (extras.getString("recyclerviewPosition") != null) {
+//                                Log.i("location", "inside scrollToPosition" + extras.getString("recyclerviewPosition"));
+                                mRecyclerProducts.scrollToPosition(Integer.parseInt(extras.getString("recyclerviewPosition")));
+                            }
+                        }catch(Exception e){
+                        }
+
+                        //Notifying the adapter that data has been added or changed
+                        mAdapterProducts.notifyDataSetChanged();
+
+                        try {
+                            alertDialogPleaseWait.cancel();
+                        } catch (Exception e) {
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                        Log.i("location", "Inside onErrorResponse" + error);
+
+                        if (count < 2) {
+                            count++;
+
+                            try {
+                                alertDialogPleaseWait.cancel();
+                            } catch (Exception e) {
+                            }
+                            try {
+                                getProductDetailsFiltered();
+                            } catch (Exception e) {
+
+                            }
+                        } else {
+
+                            try {
+                                alertDialogPleaseWait.cancel();
+                            } catch (Exception e) {
+                            }
+
+                            androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(HomeActivity.this);
+                            LayoutInflater inflater = HomeActivity.this.getLayoutInflater();
+                            final View viewDialog=inflater.inflate(R.layout.dialog_2_buttons, null);
+                            alertDialogBuilder.setView(viewDialog);
+                            final androidx.appcompat.app.AlertDialog alertDialog = alertDialogBuilder.create();
+                            alertDialog.show();
+                            alertDialog.setCancelable(false);
+                            TextView textViewMessageHead=(TextView)viewDialog.findViewById(R.id.textViewMessageHead);
+                            textViewMessageHead.setText("MESSAGE");
+                            TextView textViewMessage=(TextView)viewDialog.findViewById(R.id.textViewMessage);
+                            textViewMessage.setText("Something went wrong. Please check your internet connection or try again later.");
+                            Button button1 = (Button) viewDialog.findViewById(R.id.button1);
+                            button1.setText("RELOAD");
+                            button1.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v)
+                                {
+                                    try {
+                                        alertDialog.cancel();
+                                    } catch (Exception e){}
+                                    getProductDetailsFiltered();
+                                }
+                            });
+                            Button button2 = (Button) viewDialog.findViewById(R.id.button2);
+                            button2.setText("CLOSE");
+                            button2.setOnClickListener(new View.OnClickListener() {
+                                public void onClick(View v)
+                                {
+                                    try {
+                                        alertDialog.cancel();
+                                    } catch (Exception e){}
+                                }
+                            });
+                        }
+
+                    }
+                }) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                SharedPreferences sharedPreferencesUserDetails = getApplicationContext().getSharedPreferences("UserDetails", MODE_PRIVATE);
+                final String token = sharedPreferencesUserDetails.getString("token", "");
+//                Log.i("location home", token);
+
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("Authorization", "Bearer " + token);
+                return params;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i("locationmap", String.valueOf(selectedBrandIds) + "," + String.valueOf(selectedItemIds) + "," + String.valueOf(editTextMinimumPrice.getText()) + "," + String.valueOf(editTextMaximumPrice.getText()));
+                params.put("selected_brand_ids", String.valueOf(selectedBrandIds));
+                params.put("selected_item_ids", String.valueOf(selectedItemIds));
+                params.put("minimum_price", String.valueOf(editTextMinimumPrice.getText()));
+                params.put("maximum_price", String.valueOf(editTextMaximumPrice.getText()));
                 return params;
             }
         };

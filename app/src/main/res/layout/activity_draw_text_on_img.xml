@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#FFFFFF" >
+
+        <com.indianecomliquidator.indianecomqc.DrawView
+            android:id="@+id/iv_draw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:src="@drawable/paris_tower" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/relativeLayoutAddToCart"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#58C27F"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:clickable="true">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SAVE IMAGE"
+                android:textStyle="bold"
+                android:id="@+id/textView19"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true"
+                android:onClick="saveImg"/>
+
+            <!--            <Button-->
+            <!--                style="?android:attr/buttonStyleSmall"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="40dp"-->
+            <!--                android:text="Reload"-->
+            <!--                android:id="@+id/button14"-->
+            <!--                android:background="@drawable/shape_reload_button"-->
+            <!--                android:paddingLeft="20dp"-->
+            <!--                android:paddingRight="20dp"-->
+            <!--                android:layout_alignParentRight="true"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:textColor="#4CAF50"-->
+            <!--                android:onClick="reloadFunction" />-->
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_save"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:text="@string/save"-->
+<!--        android:textColor="#FFFFFF" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_resume"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"-->
+<!--        android:background="#000000"-->
+<!--        android:text="resume"-->
+<!--        android:textColor="#FFFFFF" />-->
+
+</RelativeLayout>
